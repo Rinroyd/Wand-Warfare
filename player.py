@@ -7,7 +7,7 @@ class Player:
     def __init__(self, name, cursor_color, cursor_image_path):
         self.score = 0
         self.time_left = 25
-        self.bullets_left = 10
+        self.bullets_left = 15
         self.applied_effects = []
         self.name = name
         self.last_shot_position = None
