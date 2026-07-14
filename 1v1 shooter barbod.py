@@ -7,7 +7,7 @@ from NormalTarget import NormalTarget
 from FreezeItem import FreezeItem
 from TimeItem import TimeItem
 from AmmoItem import AmmoItem
-
+#a test for syncing!
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
