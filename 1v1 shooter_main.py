@@ -9,7 +9,6 @@ from TimeItem import TimeItem
 from AmmoItem import AmmoItem
 from db_manager import LeaderboardDB
 from leaderboard import Leaderboard
-#a test for syncing!
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600

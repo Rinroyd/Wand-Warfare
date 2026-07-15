@@ -24,17 +24,14 @@ class Leaderboard:
         self.screen_height = screen_height
         self.db = LeaderboardDB()  # اتصال به دیتابیس امتیازات
 
-        # فونت‌های مورد استفاده در بخش‌های مختلف صفحه
-        self.title_font = pygame.font.Font(None, 52)
-        self.header_font = pygame.font.Font(None, 26)
-        self.row_font = pygame.font.Font(None, 24)
-        self.small_font = pygame.font.Font(None, 20)
-
-        # ساخت دکمه‌های بازگشت به منو و رفرش کردن لیست امتیازات
-        btn_y = screen_height - 60
-        self.back_btn = Btn("Back", "back", (20, btn_y), (120, 44),
+        self.title_font = pygame.font.Font("fonts/VT323-Regular.ttf", 52)
+        self.header_font = pygame.font.Font("fonts/VT323-Regular.ttf", 26)
+        self.row_font = pygame.font.Font("fonts/VT323-Regular.ttf", 24)
+        self.small_font = pygame.font.Font("fonts/VT323-Regular.ttf", 20)
+        btn_y = screen_height - 70
+        self.back_btn = Btn("Back", "back", (30, btn_y), (140, 50),
                              (255, 255, 255), (40, 40, 40), (90, 170, 255))
-        self.refresh_btn = Btn("Refresh", "refresh", (screen_width - 150, btn_y), (130, 44),
+        self.refresh_btn = Btn("Refresh", "refresh", (screen_width - 190, btn_y), (160, 52),
                                 (255, 255, 255), (40, 40, 40), (90, 170, 255))
 
         # وضعیت باکس جست‌وجوی بازیکن
@@ -42,7 +39,7 @@ class Leaderboard:
         self.search_text = ""
         self.search_box_rect = pygame.Rect(screen_width - 260, 22, 240, 32)
 
-        # تعریف ستون‌های جدول به همراه عرض نسبی هرکدام (به صورت درصدی از عرض کل جدول)
+        # تعریف ستون‌های جدول به همراه عرض نسبی هرکدام
         self.columns = [
             ("#", 0.08),
             ("Username", 0.32),
@@ -84,12 +81,15 @@ class Leaderboard:
                 self.refresh()
 
     def handle_click(self, mouse_pos, clicked):
-        # بررسی کلیک روی دکمه‌ی بازگشت؛ در صورت کلیک، رشته‌ی "back" برگردانده می‌شود تا Game آن را مدیریت کند
+        # بررسی کلیک روی دکمه‌ی بازگشت
         if self.back_btn.is_clicked(mouse_pos, clicked):
             return "back"
-        # بررسی کلیک روی دکمه‌ی رفرش؛ در صورت کلیک، لیست امتیازات دوباره از دیتابیس خوانده می‌شود
+        # بررسی کلیک روی دکمه‌ی رفرش و برگرداندن نام اکشن
         if self.refresh_btn.is_clicked(mouse_pos, clicked):
+            self.search_text = ""
+            self.search_active = False
             self.refresh()
+            return "refresh"
         return None
 
     def _table_geometry(self):
