@@ -2,7 +2,7 @@ import pygame
 from game_object import GameObject
 
 CURSOR_SPEED = 5   
-# کلاس نشانگر (مکان‌نمای) بازیکن که با آن حرکت می‌کند و شلیک انجام می‌شود
+# کلاس نشانگر بازیکن که با آن حرکت می‌کند و شلیک انجام می‌شود
 class Cursor(GameObject):
     
     def __init__(self, location, size, color, image_path):

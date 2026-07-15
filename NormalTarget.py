@@ -27,7 +27,7 @@ class NormalTarget(Target):
         surface.blit(self.image, self.rect)
 
     def update(self):
-        # پیشروی انیمیشن؛ وقتی از آخرین فریم رد شد، دوباره از اول شروع می‌شود (لوپ)
+        # پیشروی انیمیشن؛ وقتی از آخرین فریم رد شد، دوباره از اول شروع می‌شود (حلقه)
         self.current_frame += self.animation_speed
         if self.current_frame >= len(self.frames):
             self.current_frame = 0.0

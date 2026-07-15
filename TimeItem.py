@@ -1,12 +1,12 @@
 import pygame
 from target import Target
 
-# آیتم زمان (ساعت شنی): وقتی بازیکن این هدف رو بزنه، مقداری زمان بازی بهش اضافه می‌شه
+# آیتم زمان (ساعت شنی): وقتی بازیکن این هدف رو بزنه، مقداری زمان بهش اضافه می‌شه
 class TimeItem(Target):
     def __init__(self, location, size, color):
         super().__init__(location, size, color)
 
-        # بارگذاری فریم‌های انیمیشن این آیتم از سه تصویر جداگانه
+        #  بارگذاری فریم‌های این آیتم از سه تصویر جداگانه برای ایجاد انیمیشن
         self.frames = []
         for path in ["graphics/Time1.jpg", "graphics/Time2.jpg", "graphics/Time3.jpg"]:
             img = pygame.image.load(path).convert()
@@ -27,7 +27,7 @@ class TimeItem(Target):
         surface.blit(self.image, self.rect)
     
     def update(self):
-        # پیشروی انیمیشن؛ وقتی از آخرین فریم رد شد، دوباره از اول شروع می‌شود (لوپ)
+        # پیشروی انیمیشن؛ وقتی از آخرین فریم رد شد، دوباره از اول شروع می‌شود (حلقه)
         self.current_frame += self.animation_speed
         if self.current_frame >= len(self.frames):
             self.current_frame = 0.0

@@ -2,7 +2,7 @@ import pygame
 from game_object import GameObject
 from abc import ABC, abstractmethod
 
-
+#کلاس انتزاعی اهداف با ارث بری چندگانه از کلاس گیم ابجکت
 
 
 class Target(GameObject, ABC):

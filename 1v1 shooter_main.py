@@ -103,7 +103,7 @@ class Game:
                 if event.key == pygame.K_ESCAPE and self.state == 4:
                     pygame.quit()
                     sys.exit()
-                # بازگشت به منوی اصلی با دکمه Esc در صفحه راهنما
+                # بازگشت به منوی اصلی با دکمه اسکیپ در صفحه راهنما
                 elif event.key == pygame.K_ESCAPE and self.state == 5:
                     self.state = 1
                 
@@ -121,7 +121,7 @@ class Game:
                     if event.key == pygame.K_BACKSPACE:
                         self.player1_name = self.player1_name[:-1]
                     elif event.key == pygame.K_RETURN and self.player1_name.strip():
-                        self.active_input = 2  # تغییر فوکوس تایپ به بازیکن دوم پس از زدن Enter
+                        self.active_input = 2  # تغییر فوکوس تایپ به بازیکن دوم پس از زدن اینتر
                     else:
                         self.player1_name += event.unicode
 
@@ -130,7 +130,7 @@ class Game:
                     if event.key == pygame.K_BACKSPACE:
                         self.player2_name = self.player2_name[:-1]
                     elif event.key == pygame.K_RETURN and self.player2_name.strip():
-                        # ساخت شیء جدید از کلاس Player برای هر دو بازیکن با ویژگی‌های منحصر به فرد
+                        # ساخت شیء جدید از کلاس پلیر برای هر دو بازیکن با ویژگی‌های منحصر به فرد
                         self.player1 = Player(self.player1_name, (190, 151, 223), "graphics/Purplecursor.jpg")
                         self.player2 = Player(self.player2_name, (229, 182, 117), "graphics/yellowcursor.jpg")
                         pygame.mixer.music.fadeout(500) # محو شدن موزیک منو برای شروع بازی اصلی
@@ -213,14 +213,14 @@ class Game:
         self.player1.draw(self.game_display)
         self.player2.draw(self.game_display)
 
-        # به روزرسانی فیزیک و ترسیم اهداف (Ghosts) فعال روی صفحه
+        # به روزرسانی فیزیک و ترسیم اهداف (روح ها) فعال روی صفحه
         for target in self.targets:
             target.update()
             target.draw(self.game_display)
             
         keys = pygame.key.get_pressed()
         
-        # کنترل حرکت کراس‌هر (نشانه) بازیکن اول با کلیدهای WASD
+        # کنترل حرکت کراس‌هر (نشانه) بازیکن اول با کلیدها
         dx = 0
         dy = 0
         if keys[pygame.K_w]:
@@ -246,7 +246,7 @@ class Game:
             dx_2 += self.player2.cursor.speed
         self.player2.move_cursor(dx_2, dy_2, SCREEN_WIDTH, SCREEN_HEIGHT)
 
-        # مدیریت شلیک‌ها و چک کردن تعداد مهمات مگ‌ها
+        # مدیریت شلیک‌ها و چک کردن تعداد مهمات
         shot1 = None
         shot2 = None
         if self.shoot1:
@@ -261,7 +261,7 @@ class Game:
             else:
                 self.empty_sound.play()
 
-        # بررسی برخورد فیزیکی تیرها به اهداف و آیتم‌های روی صفحه
+        # بررسی برخورد فیزیکی تیرها به اهداف و تارگت های روی صفحه
         self.check_collision(self.player1, shot1)
         self.check_collision(self.player2, shot2)
         
@@ -329,7 +329,7 @@ class Game:
         self.targets.append(item)
     
     def setup_game(self):
-        """آماده‌سازی شرایط اولیه فیزیکی و تولید ۵ هدف شروع بازی"""
+        """آماده‌سازی شرایط اولیه فیزیکی و تولید 5 هدف شروع بازی"""
         self.last_tick = pygame.time.get_ticks() 
         self.targets = []
         for _ in range(5):
@@ -345,7 +345,7 @@ class Game:
             if self.player2.time_left > 0:
                 self.player2.time_left -= 1
 
-        # وضعیت بحرانی: هر کدام از بازیکنان زمانشان ۵ ثانیه یا کمتر شود
+        # وضعیت پایانی: هر کدام از بازیکنان زمانشان 5 ثانیه یا کمتر شود
         p1_danger = 0 < self.player1.time_left <= 5
         p2_danger = 0 < self.player2.time_left <= 5
 
@@ -389,7 +389,7 @@ class Game:
         pygame.draw.rect(self.game_display, border_color, title_bg_rect, width=2, border_radius=8)
         self.game_display.blit(title_text, title_rect)
 
-        # منطق ساده تشخیص برنده مسابقه بر اساس مقایسه ریاضی امتیازها
+        # منطق ساده تشخیص برنده مسابقه بر اساس مقایسه عددی امتیازها
         if self.player1.score > self.player2.score:
             winner_text = f"{self.player1.name} WINS"  
             winner_color = (229, 182, 117)  
@@ -442,10 +442,10 @@ class Game:
         self.active_input = 1 
         self.targets = []
         pygame.mixer.music.play(-1)
-        self.state = 2 # انتقال مستقیم به منوی ثبت نام‌ها
+        self.state = 2 # انتقال مستقیم به منوی ثبت بازیکنان
     
     def draw_hud(self):
-        """رسم رابط کاربری زنده بالای صفحه بازی (شامل نام‌ها، مهمات، زمان و امتیاز مگ‌ها)"""
+        """رسم رابط کاربری زنده بالای صفحه بازی (شامل نام‌ها، مهمات، زمان و امتیازها)"""
         p1_name = self.small_font.render(self.player1.name, True, (223, 151, 190))
         p1_bullets = self.small_font.render(f"Bullets: {self.player1.bullets_left}", True, (229, 182, 117))
         p1_time = self.small_font.render(f"Time: {self.player1.time_left}s", True, (229, 182, 117))
@@ -467,7 +467,7 @@ class Game:
         self.game_display.blit(p2_score, (650,90))
     
     def description_loop(self):
-        """رسم منوی راهنمای بازی (How To Play) و نمایش کلیدهای حرکتی مگ‌ها و راهنمای عملکرد آیتم‌ها"""
+        """رسم منوی راهنمای بازی و نمایش کلیدهای حرکتی مگ‌ها و راهنمای عملکرد آیتم‌ها"""
         self.game_display.blit(self.menu_background, (0, 0))
     
         center_x = SCREEN_WIDTH // 2
@@ -510,7 +510,7 @@ class Game:
         self.game_display.blit(back, back_rect)
     
     def run(self):
-        """ماشین وضعیت کل بازی (FSM) - کنترل می‌کند در هر لحظه کدام صفحه و حلقه باید رندر و اجرا شود"""
+        """ماشین وضعیت کل بازی - کنترل می‌کند در هر لحظه کدام صفحه و حلقه باید رندر و اجرا شود"""
         running = True
 
         while running:

@@ -2,7 +2,8 @@ import sqlite3
 import os
 from datetime import date
 
-# مسیر فایل دیتابیس SQLite که کنار همین فایل پایتون ذخیره می‌شود
+# مسیر فایل دیتابیس 
+# SQLite که کنار همین فایل پایتون ذخیره می‌شود
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "leaderboard.db")
 
 # کلاس مدیریت دیتابیس جدول امتیازات (Leaderboard)
@@ -13,11 +14,12 @@ class LeaderboardDB:
         self._init_db()  # اطمینان از وجود جدول موردنیاز در دیتابیس
 
     def _connect(self):
-        # ساخت یک اتصال جدید به دیتابیس SQLite
+        # ساخت یک اتصال جدید به دیتابیس 
+        # SQLite
         return sqlite3.connect(self.db_path)
 
     def _init_db(self):
-        # ساخت جدول scores در صورت عدم وجود (برای جلوگیری از خطا در اجراهای بعدی)
+        # ساخت جدول امتیازات در صورت عدم وجود (برای جلوگیری از خطا در اجراهای بعدی)
         conn = self._connect()
         cur = conn.cursor()
         cur.execute("""
@@ -61,7 +63,7 @@ class LeaderboardDB:
         return rows
 
     def search_player(self, username, limit=10):
-        # جست‌وجوی امتیازات یک بازیکن خاص بر اساس بخشی از نام کاربری (جست‌وجوی تقریبی با LIKE)
+        # جست‌وجوی امتیازات یک بازیکن خاص بر اساس بخشی از نام کاربری
         conn = self._connect()
         cur = conn.cursor()
         cur.execute(

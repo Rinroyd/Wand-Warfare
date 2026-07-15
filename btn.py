@@ -4,7 +4,7 @@ import pygame
 # کلاس دکمه‌ی قابل کلیک برای استفاده در منوها و رابط کاربری بازی
 class Btn:
     def __init__(self, text, action, location, size, text_color, back_color, for_color):
-        self.action = action  # نام اکشنی که با کلیک روی این دکمه اجرا می‌شود (مثلا "new_game")
+        self.action = action  # نام اکشنی که با کلیک روی این دکمه اجرا می‌شود
 
         self.font = pygame.font.Font("fonts/VT323-Regular.ttf", 50)
 
@@ -12,12 +12,12 @@ class Btn:
         self._location = location
         self._width, self._height = size
 
-        # رنگ‌های حالت عادی دکمه (این مقادیر پارامترهای ورودی text_color/back_color/for_color را بازنویسی می‌کنند)
+        # رنگ‌های حالت عادی دکمه 
         self.text_color = (229, 182, 117)
         self.b_color = (15, 15, 20)
         self.f_color = (28, 48,89)
 
-        # رنگ‌های حالت hover (وقتی موس روی دکمه باشد)
+        # رنگ‌های حالت انتخاب (وقتی موس روی دکمه باشد)
         self.hover_text_color = (190, 151, 223)
         self.hover_back_color = (15, 15, 20)
         self.hover_for_color = (73, 95, 142)
@@ -25,7 +25,7 @@ class Btn:
         self.text = self.font.render(self._text, True, self.text_color)
 
         # rect1: مستطیل بیرونی (حاشیه/بوردر دکمه)
-        # rect2: مستطیل داخلی که کمی کوچکتره تا افکت حاشیه/بوردر ایجاد بشه
+        # rect2: مستطیل داخلی که کمی کوچکتره تا افکت حاشیه ایجاد بشه
         self.rect1 = pygame.Rect(*location, *size)
         self.rect2 = pygame.Rect(location[0] + 4, location[1] + 4, size[0] - 8, size[1] - 8)
 
@@ -40,7 +40,7 @@ class Btn:
         surface.blit(self.text, text_rect)
 
     def hover(self, surface):
-        # رسم دکمه در حالت هاور (وقتی موس روی آن قرار دارد) با رنگ‌بندی متفاوت
+        # رسم دکمه در حالت هاور با رنگ‌بندی متفاوت
         self.text = self.font.render(self._text, True, self.hover_text_color)
 
         pygame.draw.rect(surface, self.hover_back_color, self.rect1, border_radius=17)

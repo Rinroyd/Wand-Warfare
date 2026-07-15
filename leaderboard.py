@@ -72,7 +72,7 @@ class Leaderboard:
             elif event.key == pygame.K_RETURN:
                 self.refresh()
             elif event.key == pygame.K_ESCAPE:
-                # پاک کردن جست‌وجو و خروج از حالت فعال با ESC
+                # پاک کردن جست‌وجو و خروج از حالت فعال با اسکیپ
                 self.search_text = ""
                 self.search_active = False
                 self.refresh()
@@ -102,7 +102,7 @@ class Leaderboard:
         return table_x, table_y, table_width, header_height, row_height
 
     def _draw_glow_panel(self, surface, rect, color, radius=14, layers=4):
-        # رسم یک پنل با افکت درخشش (glow) دور آن با چند لایه‌ی نیمه‌شفاف که به تدریج بزرگ‌تر می‌شوند
+        # رسم یک پنل با افکت درخشش دور آن با چند لایه‌ی نیمه‌شفاف که به تدریج بزرگ‌تر می‌شوند
         pad = layers * 4
         glow_surf = pygame.Surface((rect.width + pad * 2, rect.height + pad * 2), pygame.SRCALPHA)
         for i in range(layers, 0, -1):
@@ -171,7 +171,7 @@ class Leaderboard:
                 if username in current_players:
                     self._draw_rounded_shadow_rect(surface, row_rect, CURRENT_PLAYER_COLOR, radius=8)
                 elif idx % 2 == 1:
-                    # ردیف‌های زوج با رنگ متفاوت (افکت خط‌خطی/striped) رسم می‌شوند
+                    # ردیف‌های زوج با رنگ متفاوت رسم می‌شوند
                     pygame.draw.rect(surface, ROW_ALT_COLOR, row_rect, border_radius=8)
 
                 text_color = rank_colors.get(rank, TEXT_COLOR)
@@ -191,7 +191,7 @@ class Leaderboard:
         pygame.draw.rect(surface, PANEL_COLOR, self.search_box_rect, border_radius=8)
         border_col = HEADER_COLOR if self.search_active else (70, 70, 82)
         pygame.draw.rect(surface, border_col, self.search_box_rect, width=2, border_radius=8)
-        # نمایش متن تایپ‌شده یا متن راهنمای پیش‌فرض ("Search player...") در صورت خالی بودن
+        # نمایش متن تایپ‌شده یا متن راهنمای پیش‌فرض در صورت خالی بودن
         display_text = self.search_text if (self.search_text or self.search_active) else "Search player..."
         text_color = TEXT_COLOR if self.search_text else MUTED_TEXT
         search_surf = self.small_font.render(display_text, True, text_color)
